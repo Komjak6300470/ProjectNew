@@ -23,7 +23,7 @@
           color="orange lighten-2"
           @click="goto('/')"
         >
-          click Bitcoin to go to Portfolio
+          click Pizza to go to Main page
         </v-btn>
 
       <v-spacer></v-spacer>

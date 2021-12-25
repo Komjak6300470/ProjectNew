@@ -3,7 +3,7 @@
     <v-row class="text-center">
       <v-col cols="12">
         <h1 class="display-2 font-weight-bold mb-3 white123">
-          Portfolio
+          Foodwars
         </h1>
       </v-col>
     </v-row>
@@ -13,7 +13,7 @@
         <template>
           <v-card>
             <v-card-title>
-              Asset
+              Restaurants
               <v-spacer></v-spacer>
               <v-text-field
                 v-model="search"
@@ -87,7 +87,7 @@
               dialog = true;
             "
             color="success"
-            >Add Asset</v-btn
+            >Add Restaurants</v-btn
           >
         </template>
 
@@ -103,29 +103,23 @@
                 <v-row>
                     <v-col cols="12" class="col-md-4 col-sm-12">
                       <v-text-field
-                        v-model="editedItem.bmi"
+                        v-model="editedItem.note"
                         
                         :rules="bmiRules"
-                        label="Value in Baht"
-                        type="number"
+                        label="Name of the Restaurants"
+                        
                         required
                       ></v-text-field>
                     </v-col>
                     
                     <v-col cols="12" class="col-md-4 col-sm-12">
                       <v-text-field
-                        v-model="editedItem.note"
-                        
-                        label="Asset Name"
+                        v-model="editedItem.bmi"
+                        :rules="ScoreRules"
+                        label="Rate Your Restaurants out of 5"
                       ></v-text-field>
                     </v-col>
-                      <v-col cols="12" class="col-md-4 col-sm-12">
-                      <v-text-field
-                        v-model="editedItem.usd"
-                        :rules="usdRules"
-                        label="Price in USD"
-                      ></v-text-field>
-                    </v-col>
+                      
                     <v-col cols="12" class="col-md-4 col-sm-12">
                       <v-text-field
                         v-model="editedItem.noteea"
@@ -148,7 +142,7 @@
                 :disabled="!valid"
                 @click="validate"
                 color="success"
-                >Add Asset</v-btn
+                >Add Restaurants</v-btn
               >
               <v-btn v-else @click="validate" color="success"
                 >Edit</v-btn
@@ -158,10 +152,27 @@
         </v-dialog>
       </v-col>
     </v-row>
+     <v-row>
+      <v-col cols="12" class="d-flex justify-center align-center">
+        <template>
+          <v-rating
+  color="green"
+  empty-icon="mdi-star-outline"
+  full-icon="mdi-heart"
+  hover
+  length="5"
+  size="64"
+  value="3"
+></v-rating>
+        </template>
+          </v-col>
+      </v-row>
   </v-container>
 </template>
 
 <script>
+
+
 
 import {
   getFirestore,
@@ -182,84 +193,26 @@ export default {
     bmiTable: [
       {
         
-        bmi: 1000000,
-        note: "BTC",
-        usd: 30303,
-        noteea: "Buy for son",
+        bmi: '',
+        note: '',
+        usd: '',
+        noteea: '',
       },
-      {
-        
-        bmi: 200000,
-        note: "ETH",
-        usd: 6060,
-        noteea: "Buy for son",
-      },
-      {
-        
-        bmi: 50000,
-        note: "DOGE",
-        usd: 1515,
-        noteea: "Elon",
-      },
-      {
-        
-        bmi: 25000,
-        note: "GALA",
-        usd: 757,
-        noteea: "Buy for future",
-      },
-      {
-    
-        bmi: 25000,
-        note: "SHIB",
-        usd: 757,
-        noteea: "Elon tweet",
-      },
-      {
       
-        bmi: 10000,
-        note: "ALPHA",
-        usd: 303,
-        noteea: "Pools",
-      },
-      {
-       
-        bmi: 50000,
-        note: "SOL",
-        usd: 1515,
-        noteea: "Staking",
-      },
-      {
-        
-        bmi: 50000,
-        note: "LUNA",
-        usd: 1515,
-        noteea: "",
-      },
-      {
-        
-        bmi: 50000,
-        note: "ADA",
-        usd: 1515,
-        noteea: "Buy for profit",
-      },
     ],
 
     search: "",
     headers: [
      
       {
-        text: "Asset",
+        text: "Name",
         value: "note",
       },
       {
-        text: "Value in baht",
+        text: "Score",
         value: "bmi",
       },
-      {
-        text: "Value in USD",
-        value: "usd",
-      },
+     
        {
         text: "Extra note",
         value: "noteea",
@@ -268,17 +221,17 @@ export default {
     ],
 
    valid: true,
-    bmi: 0,
     bmiRules: [
-      (v) => !!v || "Value can't be null",
-      (v) => (v && v > 0 && v < 1000000000000) || "",
+      (v) => v.length >= 1 || "Must be Valid Name",
+      
+    ],
+     ScoreRules: [
+      
+      (v) => (v && v > 0 && v < 6) || "Must be 1-5",
+      
     ],
     
-    usdRules: [
-      (v) => !!v || "Value can't be null",
-      (v) => (v && v > 0 && v < 1000000000000) || "",
-    ],
-
+    
     
     note: "",
 
@@ -310,8 +263,8 @@ export default {
 
   methods: {
     getColor(bmi) {
-      if (bmi < 18.5) return "black";
-      else if (bmi >= 18.5 && bmi < 23) return "black";
+      if (bmi < 2 ) return "yellow";
+      else if (bmi >= 3) return "green";
       else return "black";
     },
     SignInAnonymously() { const auth = getAuth(); 

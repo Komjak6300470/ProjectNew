@@ -1,14 +1,14 @@
 <template>
   <v-app>
     <v-app-bar app color="blue-grey">
-       <v-toolbar-title>Portfolio</v-toolbar-title>
+       <v-toolbar-title>Foodwars</v-toolbar-title>
      
      <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
           class="shrink mr-2 pointer"
           contain
-          src="https://cdn-icons-png.flaticon.com/512/1490/1490849.png"
+          src="https://images.vexels.com/media/users/3/136312/isolated/lists/213fb725b5fbbd669093a338c9c16bdd-logo-pizza-fast-food.png"
           transition="scale-transition"
           width="40"
           @click="goto('/')"
@@ -53,9 +53,10 @@
 
 <style>
 #app {
-  background: url('https://wallpaperaccess.com/full/1393720.jpg')
-    no-repeat center center fixed !important;
+  background: url('https://i.pinimg.com/originals/f4/83/4b/f4834b81fe7412c36c81bb5c87969d52.jpg')
+     center !important;
   background-size: cover;
+  
 }
 </style>
 
