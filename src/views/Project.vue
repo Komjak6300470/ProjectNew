@@ -265,7 +265,7 @@ export default {
     getColor(bmi) {
       if (bmi < 2 ) return "yellow";
       else if (bmi >= 3) return "green";
-      else return "black";
+      else return "yellow";
     },
     SignInAnonymously() { const auth = getAuth(); 
     signInAnonymously(auth) 
